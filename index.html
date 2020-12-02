@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title>我在Reykjavíkur等你！</title>
+  </head>
+
+  <style>
+    .aa{
+      background: red;
+      width: 300px;
+      height: 300px;
+    }
+
+  </style>
+
+
+
+<body>
+  <div id="app">
+    <img src="1.webp" width="500px" height="250px" >
+    <br>
+    <input type="text"  v-model="key" style="width:500px;height:20px" @keyup.enter="openGoogle">
+    <input type="button" value="Search" @click = 'openGoogle'>
+    <h5 v-show='key.length!=0'>即将跳转：{{src}}{{key}}</h5>
+
+    <h3><input type="button" value="Clear" @click = 'clear'>
+
+    <ul>
+      <li v-for='item,index in his'> <a :href=src+item target="_blank" style=" color:#666; font-size:12px;">{{item}}</a>
+        <input type="button" value="删除该条" @click = 'del' width="100px">
+
+      </li>
+    </ul>
+  </div>
+
+
+<script src='vue.js'></script>
+
+<script>
+    var app = new Vue({
+      el:"#app",
+      data:{
+          key:"",
+          src:"https://www.google.com.hk/search?q=",
+          his:[],
+
+      },
+      methods:{
+        openGoogle(){
+          window.open(this.src+this.key);
+          this.his.push(this.key)
+            this.key='';
+        },
+        clear(){
+          this.his=[];
+        },
+        del(index){
+          this.his.splice(index,1);
+        }
+            }
+
+
+})
+
+</script>
+</body>
+</html>
